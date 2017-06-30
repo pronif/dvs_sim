@@ -2,6 +2,11 @@
 
 implementations in matlab for prototyping algorithms
 
+version1
+runme, dhalgo
+version2
+fprunme, fpalgo
+
 Important: 
 `DO NOT COMMIT BINARY FILES TO THE REPOSITORY !`
 (instead share them via polybox etc.)
