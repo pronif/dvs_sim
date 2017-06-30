@@ -13,19 +13,19 @@ function dhalgo(img)
 persistent sbuf
 
 % magic constant
-theta=.2;
+theta=.18;
 
-gry=rgb2gray(img);
-img=0; % <- discard image
-ins=log((double(gry)+1)/256); % intensity (-inf,0]
+gry=rgb2gray(img); % [uint8]
+img=[]; % <- discard image
+ins=log(double(gry)+1); % intensity on a logarithmic scale
 
 if isempty(sbuf)
   disp('initialize dhalgo')
   sbuf=ins; % initialize saturation buffer to first image
 end
 
-evt0=uint8(gry*0); % events array with positive polarity
-evt1=uint8(gry*0); % events array with negative polarity
+evt0=gry*0; % events array with positive polarity [uint8]
+evt1= evt0; % events array with negative polarity [uint8]
 
 % loop through all the pixels
 for i=1:size(ins,1)
@@ -46,9 +46,9 @@ end
 
 % visualization
 vis=repmat(gry,[1 1 3]);
-vis(:,:,1)=vis(:,:,1)+evt1;
-vis(:,:,2)=vis(:,:,2)+evt0;
+vis(:,:,1)=vis(:,:,1)+evt1; % red
+vis(:,:,2)=vis(:,:,2)+evt0; % green
 
-imshow(imresize(vis,2.0))
+imshow(imresize(vis,2))
 pause(eps)
 
